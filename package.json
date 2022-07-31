@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "million": "^1.9.6",
+    "shorthash": "^0.0.2",
     "solid-js": "^1.3.15"
   }
 }
