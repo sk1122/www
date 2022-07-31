@@ -1,7 +1,7 @@
 import { createSignal } from 'solid-js';
 
 export default function Age() {
-  const BIRTHDAY = new Date('January 5, 2005').getTime();
+  const BIRTHDAY = new Date('March 25, 2003').getTime();
   const calc = () => {
     const diff = new Date().getTime() - BIRTHDAY;
     return (diff / 1000 / 60 / 60 / 24 / 365).toFixed(9);
