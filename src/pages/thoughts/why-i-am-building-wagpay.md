@@ -7,21 +7,29 @@ layout: ../../layouts/Layout.astro
 
 ### Little background about me
 
-As you might know, I am Satyam, a internet taught computer programmer with an heavy interest in blockchain and deep tech. I come from a typical marathi middle class family, my whole family (except my parents) work for government mostly in education dept. As my parents werent government employees and decided to do something of their own and because of some circumstances we were very poor than rest of our family members and growing up it didn't bother me except for a few moments, but my parents were expecting me to be a government employee, I didn't wanted to be a government employee, I used to listed to stories of Mark zuckerberg and Bill gates and got inspired by them decided to do something in tech industry
+WagPay started on 5th Feb, at exactly 4 am in the morning, I was casually watching a youtube video and an idea came to my mind, there were many businesses that wanted to accept multiple cryptos but it was just to intgrate all of them, so why not create a crypto payment gateway?
 
-It was 2016, at the height of *Indian Tech Youtube Boom* and I decided to start my own youtube channel, made 50+ videos explaining new mobiles, laptops, games and other tech devices, at the same time my mother used to take computer classes, she was learning HTML, CSS and DTP. One day, I took her HTML notes and decided to build a website for my youtube channel, I was successful but didn't knew we also need to host to show it to others ;)
+So, I shared this idea with Mandar and we quickly started to get on the table and ship it.
 
-After about 2 years, I finished 10th, decided to ditch the +2 route and opted for +3 route which gave me more free time to self learn programming and hell I did that, created a lot of projects in ML, Web Dev, took various internships and decided to get into fulltime into web3 at around January.
+I built the whole version from ground up (backend + frontend + sdk) and we give it out to some businsesses to test it out.
 
-In web3, I built various projects with some awesome people (same people I am building Fetcch (Prev WagPay) with), won various grants, decided to take an internship, but never stopped building at nights and weekends, I was about to be converted to full time but I decided to left that opportunity, I decided to build and grow WagPay (Now Fetcch)
+We were giving out a super simple SDK, where biz would create a payment request and user could pay in any token they wanted on that unique link generated for that payment request.
+
+The response was good but the product was unfinished yet, we wanted to enable any token <> any token transfers, so as a user you could pay in any token and merchant would receive in any token and that brought us into the cross chain rabbithole.
+
+We thought this was a major problem to solve and instantly got onto this by building an liquidity aggregator and integrating it into payment gateway and it was a hit!
+
+But then one thing led to another and we lost our interest in building a payment gateway and decided to go all in on the cross chain future.
+
+While building liquidity aggregator, we saw that many bridges were requesting users to have gas tokens on destination chains to withdraw tokens and minimum amount was very high for most of the bridges and P2P payments weren't possible in this scenario.
+
+Satoshi had envisoned Crypto to be a simple P2P payment system, it is possible in a single chain enviornment, but world is cross chain now and we can't achieve this goal with this high minimum amount, so we came up with our bridge design, which supports super low transaction value starting from a ~3$ and Wallet ID Protocol which abstracts away addresses from users.
 
 ### But why did I chose to build WagPay (Now Fetcch), even though my bank balance was drying up and I had bills to pay?
 
-Its interesting question because I also don't know the answer to it
+I am a developer by heart and it always excites me to solve a problem which is harder and which could unlock the true potential of the tech that I am working on.
 
-- *It can be the tech, as cross chain and blockchain UX is space which I have been studying since my day 1 in blockchain*
-- *It can be the opportunity to build something which might be used by billions*
-- *It can just be money (Which I don't have yet😭😂)*
+And at Fetcch (Prev WagPay), we are exactly doing that, unlocking the potential of blockchains and making it accessible to masses.
 
 ## What is Fetcch (Prev WagPay)?
 
@@ -81,3 +89,48 @@ This will solve
 ### We are building an ID Protocol
 
 We are building a Cross Chain, Composable Wallet ID Protocol
+
+Let's understand it better with the story of Alice & Bob
+
+```
+Alice and Bob are friends
+
+Bob owes Alice 100 USDT (SOL) which he borrowed for some work
+
+Alice wants Bob to repay her, but Bob says "I don't have any token on Solana now, I just don't use Solana anymore"
+
+But Alice is still adamant that she wants Bob to repay her on Solana only and not other chain 'cause she doesn't use any other chain and those tokens will either go in vain or she would have to bridge it herself
+
+Why Alice should do all the work herself, when she helped Bob in first place?
+
+So, Bob decides to bridge it himself, first he will go for Bridge & DEX hunting or will use some bridge aggregator, after finding a suitable bridge + dex pair, then he will ask Alice for her Solana address and wait for that Bridge & DEX to process transactions and he will pay multiple gas fees for that transaction, if it is "that type" of bridge, then he would also need to have gas on destination chain🤦
+
+Bob thinks to himself, "Why did Satoshi decide on using this clumsy addresses instead of shorter IDs like UPI has?"
+
+Bob doesn't know shit about cryptography and blockchain it seems😁
+
+But he posed a serious question, Why isn't their any ID System which could be composable and not bound to a chain?
+
+- ENS is there, but its single chain
+- Centralized solutions exists, but they are not composable and are centralized, duh
+
+Is it too hard? or is it not necessary?
+
+We are debunking all this myths and building WagPay ID
+
+This will be 3Cs - concise, composable, cross chain ID
+
+WagPay ID can be connected to various addresses, data will be stored on decentralized storage solutions like Arweave or IPFS 
+
+In above scenario, Alice will have alice@wallet1 and Bob will have bob@wallet2, bob@wallet2 will pay any token he wants from any chain and alice@wallet1 will set Solana as her default chain, so any incoming payment would directly get bridged to Solana
+```
+
+Wallet ID Protocol will directly be integrated into various wallets and they can start issuing IDs to their users
+
+So, if Steak Wallet integrates WagPay ID Protocol, they can then issue ids like `name@steak` or `name.steak`, and then this ID can talk to any ID present in WagPay ID Protocol irrespective of wallet or chain.
+
+This will not just solve P2P payments but Choice Fatigue in connecting wallets also.
+
+So right now, there are 100s of options to choose from whenever we are connecting to dApp, but if the dApp has integrated WagPay ID SDK, then it will just have a single button called `Connect Wallet`, where the user will enter their ID and a connection request will be sent to their wallet.
+
+dApps can also request a single time transaction using above mechanism, let's say if a payment gateway integrates WagPay ID SDK, it can send payment request to a ID and receive payment, instead of first connecting then transacting, as payment gateway requires only a single transaction to execute.
