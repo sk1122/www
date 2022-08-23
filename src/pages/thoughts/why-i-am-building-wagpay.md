@@ -1,7 +1,7 @@
 ---
 title: 'Why I am building Fetcch (Prev. WagPay)?'
 description: 'Why the fuck I chose to startup when I had a fantastic job in hand (obv with handsome pay) at 18?'
-date: 'July 31, 2022'
+date: 'August 24, 2022'
 layout: ../../layouts/Layout.astro
 ---
 
