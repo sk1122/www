@@ -3,7 +3,7 @@ import solid from '@astrojs/solid-js';
 import mdx from '@astrojs/mdx';
 
 export default defineConfig({
-  site: 'https://aidenybai.com',
+  site: 'https://satyamkulkarni.xyz',
   sitemap: true,
   integrations: [solid(), mdx()],
   markdown: {
