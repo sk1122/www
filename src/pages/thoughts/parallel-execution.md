@@ -1,5 +1,5 @@
 ---
-title: 'My thoughts on parallel execution'
+title: 'Parallel execution of processes'
 description: 'Current CPUs are multicore and can handle a lot of operation, VMs need to use all of those available cores.'
 date: 'November 7, 2022'
 layout: ../../layouts/Layout.astro
@@ -45,6 +45,18 @@ Ethereum's TPS could potentially increased to ~500 TPS, if EVM is able to use al
 
 [A good podcast on this](https://www.youtube.com/watch?v=DhBkrc9dECg)
 
+## How does Parallel Execution in VM works?
+
+To acheive parallelization of any process in CS, we need to first know which memory locations will the process will read/write to. 
+
+In a distributed systems, if 2 nodes are simultenously writing to a single memory location, it will result in inconsistent data and result might be wrong. To solve this, we can lock a memory location while a node is updating it, so no 2 or more nodes can update same memory location at the same time.
+
+But, if there are 2 processes, both are reading/writing to different parts of memory locations, then those 2 processes will not lock memory which affects other process. So, we can execute them in parallel and not in order!
+
+2 or more processes, which are writing to different locations and **only** reading from different or same locations can be executed parallely.
+
+Here **only** is focused because if 2 processes are reading from same location then there is not a problem, but if one is writing and another is writing, then there will consistency issues while executing them parallely.
+
 ## Various VMs that have Parallel Execution
 
 ### Solana
@@ -65,3 +77,12 @@ Transactions in Solana are list of instructions and instructions has list of acc
 
 Fuel is an optimistic rollup and instead of using EVM like everyone else, they have built their own new VM called **FuelVM**, it is an UTXO based VM which has the power of parallel transaction execution and many new things. It also has its own new language called **Sway** which is inspired by Rust.
 
+FuelVM works on **[EIP-648](https://github.com/ethereum/EIPs/issues/648)** proposed **Access Lists**. Access Lists helps FuelVM do Parallel Execution of Transaction. Every transactions has this list which conveys to VM which contracts the corresponding tx will read/write. If there are 2 or more transaction with same contracts on list `((write, write) || (write, read))`, then those tx's will need to be ordered, but if they have totally different contracts, then they can be executed parallely, thus increasing throughput.
+
+### Sui
+
+Sui is a very interesting blockchain built by the team who was working on Diem. **Sui Objects** are what powers the magic behind Sui's Parallel Execution. Sui objects can be owned by a single or multiple public keys. A Transaction has list of objects which tx will interact with. If tx only interacts with owned objects or object which has single owner in tx proposer, then that tx bypasses consensus and is executed instantly, enabling instant settlement of tx. If tx contains objects with multiple owners, then that tx will go through consensus and executed parallely with other txs whose objects don't collide.
+
+## Conclusion
+
+Nothing. Just Enjoy and Keep Building!!
