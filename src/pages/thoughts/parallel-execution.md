@@ -11,7 +11,7 @@ Don't confuse parallelization with concurrency, both are different paradigms, co
 
 Blockchain VMs are trying to parallelize transaction execution since quite a time and few have already achieved success in doing that.
 
-But first of all, let' discuss
+But first of all, let's discuss
 
 ## What is Parallel Transaction Execution?
 
@@ -40,8 +40,6 @@ For eg.
 - Ethereum - **~10-20 TPS**
 - Solana - **~2000-3000 TPS**
 - and many more blockchain en route on launch.
-
-Ethereum's TPS could potentially increased to ~500 TPS, if EVM is able to use all cores on CPU.
 
 [A good podcast on this](https://www.youtube.com/watch?v=DhBkrc9dECg)
 
@@ -86,3 +84,7 @@ Sui is a very interesting blockchain built by the team who was working on Diem. 
 ## Conclusion
 
 Nothing. Just Enjoy and Keep Building!!
+
+### Note
+
+*Parallel Execution in VMs does increase TPS of a blockchain but it is not a singular factor affecting TPS, there are multiple other parameters which affect the overall throughput of blockchain, will probably document that in next blogs*
